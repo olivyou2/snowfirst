@@ -28,7 +28,7 @@
 							<img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/logo.svg" alt="">
 						</div>
 						{% for menu in site['menu'] %}
-							<div class="btn">
+							<div class="btn" onclick="location.href=`{{ menu['link'] }}`">
 								{{ menu['name'] }}
 							</div>
 						{% endfor %}

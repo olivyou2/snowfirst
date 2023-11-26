@@ -1,45 +1,9 @@
-<link rel="stylesheet" href="./orders.css">
-<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<link rel="stylesheet" href="https://snowfirst.s3.ap-northeast-2.amazonaws.com/css/orders.css">
 
-<body>
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-    <header>
-        <div id="center">
-            <div id="left">
-                <div id="logo">
-                    <img src="./imgs/logo.svg" alt="">
-                </div>
-                <div class="btn activated">
-                    주문하기
-                </div>
-                <div class="btn">
-                    주문내역
-                </div>
-                <div class="btn">
-                    잔액충전
-                </div>
-                <div class="btn">
-                    Q&A
-                </div>
-            </div>
-    
-            <div id="right">
-                <div id="balance">
-                    30,500 원
-                </div>
-                <img id="burger" src="./imgs/burger.svg" alt="">
-                <div id="profile">
-                    <div id="name">
-                        zong._.gu
-                    </div>
-                    <div id="profile">
-                        <img src="./imgs/profile.svg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <main>
         <div id="center">
             
@@ -96,7 +60,7 @@
                         </div>
                     </div> 
                      <div id="details">
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 주문 전 수량
                             </div>
@@ -104,7 +68,7 @@
                                 0
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 수량
                             </div>
@@ -112,7 +76,7 @@
                                 0
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 남은 수량
                             </div>
@@ -122,7 +86,7 @@
                         </div>
                      </div>
                      <div id="recipt">
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 금액
                             </div>
@@ -130,7 +94,7 @@
                                 0
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 주문번호
                             </div>
@@ -140,7 +104,7 @@
                                 <img src="./imgs/clipboard.svg" alt="">
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="order_row">
                             <div id="key">
                                 주문일자
                             </div>
@@ -175,4 +139,3 @@
     
         var embla = EmblaCarousel(emblaNode, options)
     </script>  
-</body>
