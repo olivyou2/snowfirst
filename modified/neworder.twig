@@ -18,15 +18,91 @@
         </section>
 
         <section id="order">
+            {% if error %}
+                <div class="alert alert-dismissible alert-danger {% if site['rtl'] %} rtl-alert {% endif %}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ errorMessage }}
+                </div>
+            {% endif %}
+
+            {% if 1 == success %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4>{{lang('neworder.message.success')}}</h4>
+                {{lang('neworder.id')}}: {{order['id']}}<br>
+                {{lang('neworder.service')}}: {{order['service']}}
+                <br>
+                {{lang('neworder.link')}}: {{order['link']}}<br>
+                {{lang('neworder.quantity')}}: {{order['quantity']}}<br>
+                {{ lang('neworder.charge') }}: {% if order.converted %} <span data-toggle="tooltip" data-placement="top" title="{{ order.original_charge }}">{{ order['charge'] }}</span> {% else %} {{ order['charge'] }} {% endif %}<br>
+                {{ lang('neworder.balance') }}: {% if order.converted %} <span data-toggle="tooltip" data-placement="top" title="{{ order.original_balance }}">{{ order['balance'] }}</span> {% else %} {{ order['balance'] }} {% endif %}<br>
+                </div>
+            {% endif %}
+
+            {% if 2 == success %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4>{{lang('neworder.message.success')}}</h4>
+                {{lang('neworder.subscription_id')}}: {{order['id']}}<br>
+                {{lang('neworder.service')}}: {{order['service']}}
+                <br>
+                {{lang('neworder.username')}}: {{order['link']}}<br>
+                {{lang('neworder.quantity')}}:
+                {% if order['quantity_min'] == order['quantity_max'] %}
+                    {{order['quantity_max']}}
+                {% else %}
+                    {{order['quantity_min']}}-{{order['quantity_max']}}
+                {% endif %}
+                <br>
+                {{lang('neworder.new_posts')}}:
+                {{order['posts']}}
+                <br>
+                {{lang('neworder.old_posts')}}:
+                {{order['old_posts']}}
+                <br>
+                {{lang('neworder.delay')}}:
+                {{order['delay']}}
+                <br>
+                </div>
+            {% endif %}
             <div id="title">
                 주문하기
             </div>
-            <form {% if site['rtl'] %} class="rtl-form" {% endif %} action="{{ page['url'] }}" method="post" id="form">
+            <form {% if site['rtl'] %} class="rtl-form" {% endif %} action="{{ page['url'] }}" method="post"
+                id="form">
+
+                <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+                <input type="hidden" name="OrderForm[category]">
+                <input type="hidden" name="OrderForm[user_name]">
+                <input type="hidden" name="OrderForm[service]">
+                <input type="hidden" name="OrderForm[keywords]">
+                <input type="hidden" name="OrderForm[comment]">
+                <input type="hidden" name="OrderForm[mentionUsernames]">
+                <input type="hidden" name="OrderForm[usernames]">
+                <input type="hidden" name="OrderForm[usernames_custom]">
+                <input type="hidden" name="OrderForm[username]">
+                <input type="hidden" name="OrderForm[mediaUrl]">
+                <input type="hidden" name="OrderForm[hashtag]">
+                <input type="hidden" name="OrderForm[hashtags]">
+                <input type="hidden" name="OrderForm[runs]">
+                <input type="hidden" name="OrderForm[interval]">
+                <input type="hidden" name="OrderForm[total_quantity]">
+                <input type="hidden" name="OrderForm[posts]">
+                <input type="hidden" name="OrderForm[old_posts]">
+                <input type="hidden" name="OrderForm[min]">
+                <input type="hidden" name="OrderForm[max]">
+                <input type="hidden" name="OrderForm[delay]">
+                <input type="hidden" name="OrderForm[expiry]">
+                <input type="hidden" name="OrderForm[comment_username]">
+                <input type="hidden" name="OrderForm[answer_number]">
+                <input type="hidden" name="OrderForm[email]">
+                <input type="hidden" name="OrderForm[groups]">
+
+
                 <div class="title">
                     SNS
                 </div>
 
-                <input type="hidden" name="OrderForm[category]">
                 <div id="sns">
                     {% for category in extended_categories %}
                     <div class="btn">
@@ -80,7 +156,6 @@
                     서비스
                 </div>
 
-                <input type="hidden" name="OrderForm[service]">
                 <div id="service" class="open">
                     <div id="service">
                         <div id="content">
@@ -295,9 +370,10 @@
 
             fillServiceDescription(select_sid);
             closeDropdown();
+            fillPriceButton();
         });
 
-        $("input[name=OrderForm[service]]").val(frontService.name);
+        $(`input[name='OrderForm[category]']`).val(cid);
     }
 
     const fillServiceDescription = (sid) => {
@@ -311,7 +387,7 @@
         $("#service > #content > #title").text(`${service.name}`);
         $("#description > #content").text(`${service.description}`);
 
-        $("input[name=OrderForm[category]]").val(service.name);
+        $(`input[name='OrderForm[service]']`).val(service.id);
     }
 
     const getFirstServiceOfCategory = (cid) => {
@@ -321,6 +397,28 @@
         const vkeys = keys.filter(key => services[key].cid == cid);
 
         return services[vkeys[0]];
+    };
+
+    const getCurrentService = () => {
+        const sid = $(`input[name='OrderForm[service]']`).val();
+
+        const services = window.modules.siteOrder.services;
+
+        const keys = Object.keys(services);
+        const vkeys = keys.filter(key => services[key].id == sid);
+
+        return services[vkeys[0]];
+    };
+
+    const fillPriceButton = () => {
+        const service = getCurrentService();
+        const quantity = $("input#quantity").val();
+
+        const price = Math.floor(service.price / 1000) * quantity;
+
+        const formatted_price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        $("button#order").text(`${formatted_price}원 주문하기`);
     };
 
     $(function () {
@@ -345,6 +443,16 @@
 
             fillServiceDescription(service.id);
             openDropdown();
+
+            fillPriceButton();
+        });
+
+        $("input#quantity").change(e => {
+            fillPriceButton();
+        });
+
+        $("input#quantity").keydown(e => {
+            fillPriceButton();
         });
 
         // Fill services
@@ -354,6 +462,7 @@
         fillServiceDescription(firstService.id);
 
         closeDropdown();
+        fillPriceButton();
     });
 
 </script>
