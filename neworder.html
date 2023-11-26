@@ -1,0 +1,359 @@
+<link rel="stylesheet" href="https://snowfirst.s3.ap-northeast-2.amazonaws.com/css/neworder.css">
+
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<main>
+    <div id="center">
+        <section id="notice">
+            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/notice.svg" alt="" id="icon">
+            <div id="type">
+                공지
+            </div>
+            <div id="title">
+                우린 오래 전부터 어쩔 수 없는 거였어
+            </div>
+
+        </section>
+
+        <section id="order">
+            <div id="title">
+                주문하기
+            </div>
+            <form {% if site['rtl'] %} class="rtl-form" {% endif %} action="{{ page['url'] }}" method="post" id="form">
+                <div class="title">
+                    SNS
+                </div>
+
+                <input type="hidden" name="OrderForm[category]">
+                <div id="sns">
+                    {% for category in extended_categories %}
+                    <div class="btn">
+                        <input type="hidden" id="id" value="{{ category.id }}" />
+
+                        <div id="icon">
+                            {% if category.name == '유튜브' %}
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/youtube.svg" alt=""
+                                width="28" height="19">
+                            {% elseif category.name == '인스타그램' %}
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/instagram.svg" alt=""
+                                width="28" height="19">
+                            {% elseif category.name == '페이스북' %}
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/facebook.svg" alt=""
+                                width="28" height="19">
+                            {% else %}
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/youtube.svg" alt=""
+                                width="28" height="19">
+                            {% endif %}
+                        </div>
+                        <div id="title">
+                            {{ category.name }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="title">
+                    카테고리
+                </div>
+
+                <div id="category">
+                    <div id="category_container">
+
+                        <div class="category activated">
+                            구독자
+                        </div>
+                        <div class="category">
+                            좋아요
+                        </div>
+                        <div class="category">
+                            페이스북
+                        </div>
+                        <div class="category">
+                            댓글
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title">
+                    서비스
+                </div>
+
+                <input type="hidden" name="OrderForm[service]">
+                <div id="service" class="open">
+                    <div id="service">
+                        <div id="content">
+                            <span id="title">
+                            </span>
+                            <img id="dropdown"
+                                src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/big_dropdown.svg" alt="">
+                        </div>
+                    </div>
+
+                    <div id="dropdown">
+                    </div>
+
+                    <!-- <img src="" alt=""> -->
+                </div>
+
+                <div class="title">
+                    상품설명
+                </div>
+
+                <div id="description">
+                    <div id="content">
+                        유튜브 조회수 50만회
+                    </div>
+                </div>
+
+                <div class="title">
+                    링크
+                </div>
+
+                <div id="link">
+                    <input id="link" type="text" placeholder="링크를 입력해주세요" name="OrderForm[link]">
+                </div>
+
+                <div class=" title">
+                    수량
+                </div>
+
+                <div id="quantity">
+                    <input id="quantity" type="text" placeholder="수량" name="OrderForm[quantity]">
+                </div>
+
+                <button id="order">
+                    52,000원 주문하기
+                </button>
+
+            </form>
+        </section>
+
+        <aside id="aside">
+            <section id="notice">
+                <div id="title">
+                    공지사항
+                </div>
+                <div class="content">
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            우린 오래 전부터 어쩔 수 없는 거였어
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            우주 속을 홀로 떠돌며 많이 외로워 하다가
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            어느 순간 태양과 달이 겹치게 될 때면
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            모든 것을 이해할 수 있을 거야
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            우린 오래 전부터 어쩔 수 없는 거였어
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            우주 속을 홀로 떠돌며 많이 외로워 하다가
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            어느 순간 태양과 달이 겹치게 될 때면
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="date">
+                            23.04.05
+                        </div>
+
+                        <div id="title">
+                            모든 것을 이해할 수 있을 거야
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="qa">
+                <div id="title">
+                    자주 묻는 질문
+                </div>
+                <div class="content">
+                    <div class="article">
+                        <div id="title">
+                            우린 오래 전부터 어쩔 수 없는 거였어
+                        </div>
+                        <div id="icon">
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/big_dropdown.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="title">
+                            우주 속을 홀로 떠돌며 많이 외로워 하다가
+                        </div>
+                        <div id="icon">
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/big_dropdown.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="article">
+                        <div id="title">
+                            어느 순간 태양과 달이 겹치게 될 때면
+                        </div>
+                        <div id="icon">
+                            <img src="https://snowfirst.s3.ap-northeast-2.amazonaws.com/imgs/big_dropdown.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+</main>
+
+<script type="text/javascript">
+    var emblaNode = document.querySelector('#category')
+    var options = { loop: false, dragFree: true }
+
+    var embla = EmblaCarousel(emblaNode, options)
+
+    const openDropdown = () => {
+        $(this).parent().addClass("open");
+
+        $("#service>#dropdown").slideDown();
+    };
+
+    const closeDropdown = () => {
+        $(this).parent().remove("open");
+
+        $("#service>#dropdown").slideUp();
+    };
+
+    const fillServiceOptions = (cid) => {
+        const services = window.modules.siteOrder.services;
+
+        const keys = Object.keys(services);
+        const vkeys = keys.filter(key => services[key].cid == cid);
+
+        const frontService = services[vkeys[0]];
+
+        $("input#id[value=" + cid + "]").parent().addClass("activated");
+
+        $("#service > #dropdown").empty();
+
+        for (const key of vkeys) {
+            const service = services[key];
+
+            $("#service > #dropdown").append(`
+                <div class="option">
+                    <input type="hidden" id="sid" value="${service.id}" />
+                    <div id="content">
+                        ${service.name}
+                    </div>
+                </div>
+            `)
+        }
+
+        $("#dropdown>.option").click(function (e) {
+            const select_sid = e.currentTarget.querySelector("input#sid").value;
+
+            fillServiceDescription(select_sid);
+            closeDropdown();
+        });
+
+        $("input[name=OrderForm[service]]").val(frontService.name);
+    }
+
+    const fillServiceDescription = (sid) => {
+        const services = window.modules.siteOrder.services;
+
+        const keys = Object.keys(services);
+        const vkeys = keys.filter(key => services[key].id == sid);
+
+        const service = services[vkeys[0]];
+
+        $("#service > #content > #title").text(`${service.name}`);
+        $("#description > #content").text(`${service.description}`);
+
+        $("input[name=OrderForm[category]]").val(service.name);
+    }
+
+    const getFirstServiceOfCategory = (cid) => {
+        const services = window.modules.siteOrder.services;
+
+        const keys = Object.keys(services);
+        const vkeys = keys.filter(key => services[key].cid == cid);
+
+        return services[vkeys[0]];
+    };
+
+    $(function () {
+        $("#form>#service>#service").click(function () {
+            $(this).parent().toggleClass("open");
+
+            $("#service>#dropdown").slideToggle('slow');
+        });
+
+        $("#sns > .btn").click(function (e) {
+            const cid = e.currentTarget.querySelector("input").value;
+
+            $("#sns > .btn").each(function (index, element) {
+                element.classList.remove("activated");
+            });
+
+            e.currentTarget.classList.add("activated");
+
+            fillServiceOptions(cid);
+
+            const service = getFirstServiceOfCategory(cid);
+
+            fillServiceDescription(service.id);
+            openDropdown();
+        });
+
+        // Fill services
+        const firstService = getFirstServiceOfCategory(1);
+
+        fillServiceOptions(firstService.cid);
+        fillServiceDescription(firstService.id);
+
+        closeDropdown();
+    });
+
+</script>
